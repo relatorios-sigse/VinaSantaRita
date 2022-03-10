@@ -1,0 +1,17 @@
+------CALCULO RESIDUAL EJE X------
+
+cantidadcontroles = CONTROL('Cantidad';'Adición';'Control clave';'Sí')
+residual = RIESGO('Resultado inherente') * 1.0
+SI(cantidadcontroles > 0 )
+residual = residual / CONTROL('Resultado';'Promedio';'Control clave';'Sí')
+FIN
+
+DEVUELVE residual
+
+
+------CALCULO RESIDUAL EJE Y------
+
+DEVUELVE 1.0
+
+
+
