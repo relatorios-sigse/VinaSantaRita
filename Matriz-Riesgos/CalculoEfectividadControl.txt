@@ -1,81 +1,69 @@
-------EFECTIVIDAD DEL CONTROL------
-
-tipodecontrolautomatizado = ANALISISCONTROL('Tipo de la automatización';'Automático')
-tipodecontrolsemiautomtizado = ANALISISCONTROL('Tipo de la automatización';'Semiautomático')
-tipodecontrolmanual = ANALISISCONTROL('Tipo de la automatización';'Manual')
-
-oportunidaddelcontrolprev = ANALISISCONTROL('Característica';'Preventivo')
-oportunidaddelcontrolcorr = ANALISISCONTROL('Característica';'Detectivo + Preventivo')
-oportunidaddelcontroldete = ANALISISCONTROL('Característica';'Detectivo')
-
-frecuenciadelcontrolanual = ANALISISCONTROL('Frecuencia';'Anual')
-frecuenciadelcontrodiario = ANALISISCONTROL('Frecuencia';'Diaria')
-frecuenciadelcontrolmensual = ANALISISCONTROL('Frecuencia';'Mensual')
-frecuenciadelcontrolevento = ANALISISCONTROL('Frecuencia';'Por evento')
-frecuenciadelcontrolsemanal = ANALISISCONTROL('Frecuencia';'Semanal')
-
+tipodecontrol = CRITERIO('A';'Valor') 
+oportunidaddelcontrol = CRITERIO('OP';'Valor')  
+frecuenciadelcontrol  = CRITERIO('P';'Valor')
+ 
 tipodecontrol = 'No Determinado'
 
-SI(tipodecontrolautomatizado=VERDADERO)
-tipodecontrol = 'Automatizado'
+SI(tipodecontrol=1)
+tipodecontrol = '100% Automatizado - AU'
 FIN
 
-SI(tipodecontrolsemiautomtizado=VERDADERO)
-tipodecontrol = 'Semiautomatizado'
+SI(tipodecontrol=2)
+tipodecontrol = 'Semi - automatizados - SA'
 FIN
 
-SI(tipodecontrolmanual=VERDADERO)
-tipodecontrol = 'Manual'
+SI(tipodecontrol=3)
+tipodecontrol = 'Manual - MA'
 FIN
 
 oportunidaddelcontrol = 'No Determinado'
 
-SI(oportunidaddelcontrolprev=VERDADERO)
-oportunidaddelcontrol= 'Preventivo'
+SI(oportunidaddelcontrol=1)
+oportunidaddelcontrol= 'Preventivo - PR'
 FIN
 
-SI(oportunidaddelcontrolcorr =VERDADERO)
-oportunidaddelcontrol= 'Correctivo'
+SI(oportunidaddelcontrol=2)
+oportunidaddelcontrol= 'Correctivo - CO'
 FIN
 
-SI(oportunidaddelcontroldete =VERDADERO)
-oportunidaddelcontrol= 'Detectivo'
+SI(oportunidaddelcontrol=3)
+oportunidaddelcontrol= 'Detectivo - DE'
 FIN
 
 frecuenciadelcontrol = 'No Determinado'
 
-SI(frecuenciadelcontrolevento=VERDADERO)
-frecuenciadelcontrol= 'Ocasional'
+SI(frecuenciadelcontrol=1)
+frecuenciadelcontrol= 'Permanente - PE'
 FIN
 
-SI(frecuenciadelcontrodiario=VERDADERO)
-frecuenciadelcontrol= 'Permanente'
+SI(frecuenciadelcontrol=2)
+frecuenciadelcontrol= 'Periódico - PD'
 FIN
 
-SI(frecuenciadelcontrolanual=VERDADERO O frecuenciadelcontrolmensual=VERDADERO  O  frecuenciadelcontrolsemanal=VERDADERO ) 
-frecuenciadelcontrol= 'Periodico'
+SI(frecuenciadelcontrol=3)
+frecuenciadelcontrol= 'Ocasional - OC'
 FIN
 
 efectvidaddelcontrol = 0
 
-SI((frecuenciadelcontrol = 'Permanente') Y (oportunidaddelcontrol = 'Preventivo' O oportunidaddelcontrol = 'Correctivo'))
+SI((frecuenciadelcontrol = 'Permanente - PE') Y (oportunidaddelcontrol = 'Preventivo - PR' O oportunidaddelcontrol = 'Correctivo - CO'))
 efectvidaddelcontrol = 5
 FIN
 
-SI((frecuenciadelcontrol = 'Permanente' Y oportunidaddelcontrol = 'Detectivo') O (frecuenciadelcontrol = 'Periodico' Y oportunidaddelcontrol = 'Preventivo'))
+SI((frecuenciadelcontrol = 'Permanente - PE' Y oportunidaddelcontrol = 'Detectivo - DE ') O (frecuenciadelcontrol = 'Periódico - PD' Y oportunidaddelcontrol = 'Preventivo - PR'))
 efectvidaddelcontrol = 4
 FIN
 
-SI((frecuenciadelcontrol = 'Periodico') Y (oportunidaddelcontrol = 'Detectivo' O oportunidaddelcontrol = 'Correctivo'))
+SI((frecuenciadelcontrol = 'Periódico - PD') Y (oportunidaddelcontrol = 'Detectivo - DE ' O oportunidaddelcontrol = 'Correctivo - CO'))
 efectvidaddelcontrol = 3
 FIN
 
-SI((frecuenciadelcontrol = 'Ocasional') Y (oportunidaddelcontrol = 'Preventivo' O oportunidaddelcontrol = 'Correctivo'))
+SI((frecuenciadelcontrol = 'Ocasional - OC') Y (oportunidaddelcontrol = 'Preventivo - PR' O oportunidaddelcontrol = 'Correctivo - CO'))
 efectvidaddelcontrol = 2
 FIN
 
-SI(frecuenciadelcontrol = 'Ocasional' Y oportunidaddelcontrol = 'Detectivo')
+SI(frecuenciadelcontrol = 'Ocasional - OC' Y oportunidaddelcontrol = 'Detectivo - DE ')
 efectvidaddelcontrol = 1
 FIN
 
-DEVUELVE efectvidaddelcontrol
+DEVUELVE efectvidaddelcontrol 
