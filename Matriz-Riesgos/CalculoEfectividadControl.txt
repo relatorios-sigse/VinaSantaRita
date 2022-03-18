@@ -1,3 +1,5 @@
+--Efectividad de controles en matriz de riesgos
+
 tipodecontrol = CRITERIO('A';'Valor') 
 oportunidaddelcontrol = CRITERIO('OP';'Valor')  
 frecuenciadelcontrol  = CRITERIO('P';'Valor')
