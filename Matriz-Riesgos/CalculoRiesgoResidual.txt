@@ -3,7 +3,8 @@
 cantidadcontroles = CONTROL('Cantidad';'Adición';'Control clave';'Sí')
 residual = RIESGO('Resultado inherente') * 1.0
 SI(cantidadcontroles > 0 )
-residual = residual / CONTROL('Resultado';'Promedio';'Control clave';'Sí')
+sumaefectividad = CONTROL('Resultado';'Adición';'Control clave';'Sí')
+residual = (residual  1.0) / ((sumaefectividad  1.0)/ cantidadcontroles))
 FIN
 
 DEVUELVE residual
