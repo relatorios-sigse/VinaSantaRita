@@ -1,62 +1,71 @@
---Efectividad de controles en matriz de riesgos
-
-tipodecontrol = CRITERIO('A';'Valor') 
+tipodecontrol = CRITERIO('A';'Valor')
 oportunidaddelcontrol = CRITERIO('OP';'Valor')  
 frecuenciadelcontrol  = CRITERIO('P';'Valor')
  
-tipodecontrol = 'No Determinado'
+//tipodecontrol = 'No Determinado'
 
-SI(tipodecontrol=1)
+SI(tipodecontrol= 1)
 tipodecontrol = '100% Automatizado - AU'
 FIN
 
-SI(tipodecontrol=2)
+SI(tipodecontrol= 2)
 tipodecontrol = 'Semi - automatizados - SA'
 FIN
 
-SI(tipodecontrol=3)
+SI(tipodecontrol= 3)
 tipodecontrol = 'Manual - MA'
 FIN
 
-oportunidaddelcontrol = 'No Determinado'
+SI(tipodecontrol= 0)
+tipodecontrol = 'No Determinado'
+FIN
 
-SI(oportunidaddelcontrol=1)
+//oportunidaddelcontrol = 'No Determinado'
+
+SI(oportunidaddelcontrol= 1)
 oportunidaddelcontrol= 'Preventivo - PR'
 FIN
 
-SI(oportunidaddelcontrol=2)
+SI(oportunidaddelcontrol= 2)
 oportunidaddelcontrol= 'Correctivo - CO'
 FIN
 
-SI(oportunidaddelcontrol=3)
+SI(oportunidaddelcontrol= 3)
 oportunidaddelcontrol= 'Detectivo - DE'
 FIN
 
-frecuenciadelcontrol = 'No Determinado'
+SI(oportunidaddelcontrol= 0)
+oportunidaddelcontrol= 'No Determinado'
+FIN
 
-SI(frecuenciadelcontrol=1)
+//frecuenciadelcontrol = 'No Determinado'
+
+SI(frecuenciadelcontrol= 1)
 frecuenciadelcontrol= 'Permanente - PE'
 FIN
 
-SI(frecuenciadelcontrol=2)
+SI(frecuenciadelcontrol= 2)
 frecuenciadelcontrol= 'Periódico - PD'
 FIN
 
-SI(frecuenciadelcontrol=3)
+SI(frecuenciadelcontrol= 3)
 frecuenciadelcontrol= 'Ocasional - OC'
 FIN
 
-efectvidaddelcontrol = 0
+SI(frecuenciadelcontrol= 0)
+frecuenciadelcontrol= 'No Determinado'
+FIN
+
 
 SI((frecuenciadelcontrol = 'Permanente - PE') Y (oportunidaddelcontrol = 'Preventivo - PR' O oportunidaddelcontrol = 'Correctivo - CO'))
 efectvidaddelcontrol = 5
 FIN
 
-SI((frecuenciadelcontrol = 'Permanente - PE' Y oportunidaddelcontrol = 'Detectivo - DE ') O (frecuenciadelcontrol = 'Periódico - PD' Y oportunidaddelcontrol = 'Preventivo - PR'))
+SI((frecuenciadelcontrol = 'Permanente - PE' Y oportunidaddelcontrol = 'Detectivo - DE') O (frecuenciadelcontrol = 'Periódico - PD' Y oportunidaddelcontrol = 'Preventivo - PR'))
 efectvidaddelcontrol = 4
 FIN
 
-SI((frecuenciadelcontrol = 'Periódico - PD') Y (oportunidaddelcontrol = 'Detectivo - DE ' O oportunidaddelcontrol = 'Correctivo - CO'))
+SI((frecuenciadelcontrol = 'Periódico - PD') Y (oportunidaddelcontrol = 'Detectivo - DE' O oportunidaddelcontrol = 'Correctivo - CO'))
 efectvidaddelcontrol = 3
 FIN
 
@@ -64,8 +73,14 @@ SI((frecuenciadelcontrol = 'Ocasional - OC') Y (oportunidaddelcontrol = 'Prevent
 efectvidaddelcontrol = 2
 FIN
 
-SI(frecuenciadelcontrol = 'Ocasional - OC' Y oportunidaddelcontrol = 'Detectivo - DE ')
+SI(frecuenciadelcontrol = 'Ocasional - OC' Y oportunidaddelcontrol = 'Detectivo - DE')
 efectvidaddelcontrol = 1
 FIN
 
-DEVUELVE efectvidaddelcontrol 
+SI(frecuenciadelcontrol = 'No Determinado' Y oportunidaddelcontrol = 'No Determinado')
+efectvidaddelcontrol = 0
+FIN
+
+//efectvidaddelcontrol = 0
+
+DEVUELVE efectvidaddelcontrol
